@@ -25,7 +25,9 @@ USER 0
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH.
 COPY ./s2i/bin/ /usr/libexec/s2i
 
-RUN yum install -y --enablerepo=epel centos-release-dotnet centos-release-scl-rh && \
+RUN yum --enablerepo=extras install -y epel-release
+
+RUN yum install -y centos-release-dotnet centos-release-scl-rh && \
     INSTALL_PKGS="rh-nodejs10-npm rh-nodejs10-nodejs-nodemon rh-dotnet21-dotnet-sdk-2.1 rsync libgdiplus" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
